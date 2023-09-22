@@ -3,6 +3,9 @@ const app = express();
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
+const EventEmitter = require('events');
+
+const eventEmitter = new EventEmitter();
 app.use(cors());
 
 const server = http.createServer(app);
@@ -14,16 +17,22 @@ const io = new Server(server, {
   },
 });
 
+const rooms = new Map()
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+    socket.join(data.room);
+    rooms.set(data.room, [...(rooms.get(data.room) || []), {id: socket.id, username: data.name}])
+    eventEmitter.emit('send_room', {roomId: data.room, users: rooms.get(data.room)});
   });
 
+  eventEmitter.on("send_room", data => {
+    socket.to(data.roomId).emit("room_data", data.users)
+  })
+
   socket.on("send_message", (data) => {
-    console.log(`send mesage ${data}`)
     socket.to(data.room).emit("receive_message", data);
   });
 
@@ -35,3 +44,4 @@ io.on("connection", (socket) => {
 server.listen(3001, () => {
   console.log("SERVER RUNNING");
 });
+

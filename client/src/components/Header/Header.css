@@ -11,15 +11,60 @@
   border-top-right-radius: 10px;
   border-bottom: 1px solid #ededf3;
 }
-.chattext{
-  font-family: "Courier New", Courier, monospace;
-  font-size: 25px;
-  font-weight: 500;
-  color: #23374d;
-  width: 100%;
-  height: 100%;
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #23374d;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: auto;
+  border-radius: 50%;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.name {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: #23374d;
+}
+.isActive {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: #869cb5;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 250x;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+
+.active-cont {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.small-circle {
+  width: 8px;
+  height: 8px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.green {
+  background-color: #1ccc26;
+  border-color: transparent;
 }

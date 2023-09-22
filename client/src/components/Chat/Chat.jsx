@@ -11,7 +11,6 @@ export default function Chat({ socket, room, name }) {
     date: "",
     room: room,
   });
-  console.log(messageList)
   const senDmessage = async () => {
     if (messageInfo?.message !== "") {
       await socket.emit("send_message", messageInfo);
@@ -24,7 +23,6 @@ export default function Chat({ socket, room, name }) {
       });
     }
   };
-
   useEffect(() => {
     const eventListener = (data) => {
       setMessageList((list) => [...list, data]);
@@ -37,35 +35,34 @@ export default function Chat({ socket, room, name }) {
     <div className="chat">
       <div className="chat-body">
         <ScrollToBottom className="message-container">
-        {messageList?.map((message, i) => {
-          return (
-            <div
-              className={
-                message?.from === name
-                  ? "message-right-wrapper"
-                  : "message-left-wrapper"
-              }
-              key={i}
-            >
-              <p
+          {messageList?.map((message, i) => {
+            return (
+              <div
                 className={
                   message?.from === name
-                    ? "mesage-right-text"
-                    : "mesage-left-text"
+                    ? "message-right-wrapper"
+                    : "message-left-wrapper"
                 }
+                key={i}
               >
-                {message?.message}
-              </p>
-              <p className={message?.from === name ? "you" : "partner"}>
-                {message?.from === name
-                  ? `you ${message.date}`
-                  : `${message?.from} ${message?.date}`}{" "}
-              </p>
-            </div>
-          );
-        })}
+                <p
+                  className={
+                    message?.from === name
+                      ? "mesage-right-text"
+                      : "mesage-left-text"
+                  }
+                >
+                  {message?.message}
+                </p>
+                <p className={message?.from === name ? "you" : "partner"}>
+                  {message?.from === name
+                    ? `you ${message.date}`
+                    : `${message?.from} ${message?.date}`}{" "}
+                </p>
+              </div>
+            );
+          })}
         </ScrollToBottom>
-    
       </div>
       <div className="chat-sending">
         <textarea
@@ -74,6 +71,11 @@ export default function Chat({ socket, room, name }) {
           resize="none"
           placeholder="Write your mesage here ..."
           value={messageInfo?.message}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              senDmessage();
+            }
+          }}
           onChange={(e) => {
             setMessageInfo({
               ...messageInfo,
