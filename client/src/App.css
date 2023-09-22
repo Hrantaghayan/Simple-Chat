@@ -1,0 +1,68 @@
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  height: 100vh;
+}
+.img-wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.img {
+  width: 100%;
+  height: 100%;
+}
+.joining {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.inp {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: #e9b4d3;
+  border-radius: 15px;
+  border: 1px;
+  outline: none;
+}
+.inp::placeholder {
+  color: #98a4e7; /* Define the color you want for the placeholder text */
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  max-width: 100px;
+  border: 1px;
+  outline: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.join {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e9b4d3;
+}
+.none {
+  display: none;
+}
